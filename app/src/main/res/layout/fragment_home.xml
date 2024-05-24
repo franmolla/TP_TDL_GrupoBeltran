@@ -8,16 +8,18 @@
 
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/toggleButtonGroup"
-        android:layout_width="271dp"
-        android:layout_height="55dp"
+        android:layout_width="266dp"
+        android:layout_height="61dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.422"
         app:singleSelection="true">
 
         <Button
-            android:id="@+id/Lunessssssssssssssssssssss"
+            android:id="@+id/Lunes"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
@@ -71,4 +73,30 @@
             tools:layout_editor_absoluteY="424dp" />
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <NumberPicker
+            android:layout_margin="10dp"
+            android:id="@+id/horasPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:visibility="visible" />
+        <NumberPicker
+            android:layout_margin="10dp"
+            android:id="@+id/minutosPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:visibility="visible" />
+        <NumberPicker
+            android:layout_margin="10dp"
+            android:id="@+id/horarioPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:visibility="visible" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,9 +4,7 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-<<<<<<< HEAD
-=======
-        <DropdownSelection timestamp="2024-05-17T17:50:42.767947400Z">
+        <DropdownSelection timestamp="2024-05-17T23:48:06.752062Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\lobit\.android\avd\Pixel_3a_API_34.avd" />
@@ -14,7 +12,6 @@
           </Target>
         </DropdownSelection>
         <DialogSelection />
->>>>>>> origin/main
       </SelectionState>
     </selectionStates>
   </component>

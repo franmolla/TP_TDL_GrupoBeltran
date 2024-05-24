@@ -33,6 +33,16 @@ class HomeFragment : Fragment() {
             textView.text = it
         }
 
+        //seteo el NumPicker
+        binding.horasPicker.minValue = 0
+        binding.horasPicker.maxValue = 12
+        binding.minutosPicker.minValue = 0
+        binding.minutosPicker.maxValue = 59
+
+        val str =  arrayOf("AM", "PM")
+//        binding.horarioPicker.minValue = 0
+//        binding.horarioPicker.maxValue = str.size
+        binding.horarioPicker.displayedValues = str
         return root
     }
 
