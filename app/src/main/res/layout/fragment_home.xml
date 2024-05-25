@@ -18,15 +18,18 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp">
 
             <Spinner
-                android:id="@+id/my_spinner"
+                android:id="@+id/Piso"
                 android:layout_width="121dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="280dp"
-                android:baselineAligned="false" />
+                android:baselineAligned="false"
+                android:visibility="visible"
+                tools:visibility="visible" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -67,7 +70,7 @@
 
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/toggleButtonGroup"
-        android:layout_width="266dp"
+        android:layout_width="300dp"
         android:layout_height="61dp"
         android:layout_marginTop="-50dp"
         android:layout_marginBottom="100dp"
@@ -82,54 +85,61 @@
         <Button
             android:id="@+id/Lunes"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="45dp"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
-            app:icon="@drawable/baseline_360_24"
+            android:insetLeft="-16dp"
+            android:insetRight="0dp"
+            app:icon="@drawable/icons8_monday_50"
             tools:layout_editor_absoluteX="136dp"
             tools:layout_editor_absoluteY="120dp" />
 
         <Button
             android:id="@+id/Martes"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="45dp"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
-            app:icon="@drawable/baseline_air_24"
+            android:insetLeft="-16dp"
+            app:icon="@drawable/icons8_tuesday_50"
             tools:layout_editor_absoluteX="148dp"
             tools:layout_editor_absoluteY="225dp" />
 
         <Button
             android:id="@+id/Miercoles"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="45dp"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
-            app:icon="@drawable/baseline_airplane_ticket_24"
+            android:insetLeft="-16dp"
+            app:icon="@drawable/icons8_wednesday_50"
             tools:layout_editor_absoluteX="136dp"
             tools:layout_editor_absoluteY="326dp" />
 
         <Button
             android:id="@+id/Jueves"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="45dp"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
-            app:icon="@drawable/baseline_alarm_on_24"
+            android:insetLeft="-16dp"
+            app:icon="@drawable/icons8_thursday_50"
             tools:layout_editor_absoluteX="142dp"
             tools:layout_editor_absoluteY="506dp" />
 
         <Button
             android:id="@+id/Viernes"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="45dp"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
-            app:icon="@drawable/baseline_anchor_24"
+            android:insetLeft="-16dp"
+            app:icon="@drawable/icons8_friday_50"
             tools:layout_editor_absoluteX="133dp"
             tools:layout_editor_absoluteY="39dp" />
 
         <Button
             android:id="@+id/Sabado"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="45dp"
-            android:layout_height="wrap_content"
-            app:icon="@drawable/baseline_android_24"
+            android:layout_width="48dp"
+            android:layout_height="61dp"
+            android:insetLeft="-16dp"
+            app:icon="@drawable/icons8_saturday_50"
             tools:layout_editor_absoluteX="139dp"
             tools:layout_editor_absoluteY="424dp" />
     </com.google.android.material.button.MaterialButtonToggleGroup>
