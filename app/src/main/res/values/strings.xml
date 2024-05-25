@@ -10,4 +10,15 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string-array name="pisos_array">
+        <item>Piso 1</item>
+        <item>Piso 2</item>
+        <item>Piso 3</item>
+        <item>Piso 4</item>
+        <item>Piso 5</item>
+    </string-array>
 </resources>
+
+
+

@@ -28,6 +28,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="280dp"
                 android:baselineAligned="false"
+                android:entries="@array/pisos_array"
                 android:visibility="visible"
                 tools:visibility="visible" />
 
@@ -139,7 +140,7 @@
             android:layout_width="48dp"
             android:layout_height="61dp"
             android:insetLeft="-16dp"
-            app:icon="@drawable/icons8_saturday_50"
+            app:icon="@drawable/icons8_saturday_50__1_"
             tools:layout_editor_absoluteX="139dp"
             tools:layout_editor_absoluteY="424dp" />
     </com.google.android.material.button.MaterialButtonToggleGroup>
