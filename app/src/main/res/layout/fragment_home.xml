@@ -22,7 +22,7 @@
             tools:layout_editor_absoluteX="0dp">
 
             <Spinner
-                android:id="@+id/Piso"
+                android:id="@+id/SpinnerPiso"
                 android:layout_width="121dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center_horizontal"

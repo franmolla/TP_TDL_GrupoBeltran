@@ -11,8 +11,10 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
 
+    <string name="selected_item">Seleccionado:</string>
     <string-array name="pisos_array">
         <item>Piso 1</item>
+        <item>Subsuelo</item>
         <item>Piso 2</item>
         <item>Piso 3</item>
         <item>Piso 4</item>
