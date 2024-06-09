@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.tp_tdl_beltran.databinding.FragmentGalleryBinding
 import com.example.tp_tdl_beltran.ui.shared.SharedViewModel
 
-class GalleryFragment : Fragment() {
+class Piso4GalleryFragment : Fragment() {
 
     private var _binding: FragmentGalleryBinding? = null
     private val binding get() = _binding!!
@@ -20,8 +20,8 @@ class GalleryFragment : Fragment() {
     private lateinit var aula400: ImageView
     private lateinit var aula401: ImageView
     private lateinit var aula402: ImageView
-    private lateinit var aula405: ImageView
     private lateinit var aula403: ImageView
+    private lateinit var aula405: ImageView
     private lateinit var aula407: ImageView
     private lateinit var aula408: ImageView
     private lateinit var aula411: ImageView

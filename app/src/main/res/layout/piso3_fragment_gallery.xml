@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.gallery.Piso4GalleryFragment">
+    tools:context=".ui.gallery.Piso3GalleryFragment">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -18,124 +18,85 @@
 
 
         <ImageView
-            android:id="@+id/aula400"
+            android:id="@+id/aula301"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/aula400"
+            android:src="@drawable/aula301"
             android:visibility="gone" />
 
         <ImageView
-            android:id="@+id/aula401"
+            android:id="@+id/aula302"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/aula401"
+            android:src="@drawable/aula302"
             android:visibility="gone" />
 
         <ImageView
-            android:id="@+id/aula402"
+            android:id="@+id/aula303"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/aula402"
+            android:src="@drawable/aula303"
             android:visibility="gone" />
 
         <ImageView
-            android:id="@+id/aula403"
+            android:id="@+id/aula304"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/aula405"
+            android:src="@drawable/aula304"
             android:visibility="gone" />
 
         <ImageView
-            android:id="@+id/aula405"
+            android:id="@+id/aula305"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/aula405"
+            android:src="@drawable/aula305"
             android:visibility="gone" />
 
         <ImageView
-            android:id="@+id/aula407"
+            android:id="@+id/aula310"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/aula407"
+            android:src="@drawable/aula310"
             android:visibility="gone" />
 
         <ImageView
-            android:id="@+id/aula408"
+            android:id="@+id/aula313"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/aula408"
+            android:src="@drawable/aula313"
             android:visibility="gone" />
 
         <ImageView
-            android:id="@+id/aula411"
+            android:id="@+id/aula319"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/aula411"
+            android:src="@drawable/aula319"
             android:visibility="gone" />
 
         <ImageView
-            android:id="@+id/aula412"
+            android:id="@+id/piso3_aulas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/aula412"
+            android:src="@drawable/piso3_aulas"
             android:visibility="gone" />
 
         <ImageView
-            android:id="@+id/aula414"
+            android:id="@+id/piso3_mapa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/aula414"
+            android:src="@drawable/piso3_mapa"
             android:visibility="gone" />
 
-        <ImageView
-            android:id="@+id/aula416"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/aula416"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/aula417"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/aula417"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/aula430"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/aula430"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/piso4Mapa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/piso4_mapa"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/piso4Aulas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/piso4_aulas"
-            android:visibility="gone" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
