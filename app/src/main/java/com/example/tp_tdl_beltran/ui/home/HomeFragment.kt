@@ -47,6 +47,8 @@ class HomeFragment : Fragment() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
+        var pisoSeleccionado = ""
+
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -59,34 +61,31 @@ class HomeFragment : Fragment() {
                     getString(R.string.selected_item) + " " + pisos[position],
                     Toast.LENGTH_SHORT
                 ).show()
-                val aulasDisponiblesPiso3 = listOf(301, 302, 303, 304, 305)
-                val aulasDisponiblesPiso4 = listOf(400, 401, 402, 403)
-                when (pisos[position]) {
-                    "Subsuelo" -> {
-                        // funcionalidad
-                    }
-                    "Piso 1" -> {
-                        // funcionalidad
-                    }
-                    "Piso 2" -> {
-                        // funcionalidad
-                    }
-                    "Piso 3" -> {
-                        sharedViewModel.setAulasDisponibles(aulasDisponiblesPiso3)
-                        findNavController().navigate(R.id.piso3_nav_gallery)
-                    }
-                    "Piso 4" -> {
-                        sharedViewModel.setAulasDisponibles(aulasDisponiblesPiso4)
-                        findNavController().navigate(R.id.piso4_nav_gallery)
-                    }
-                    "Piso 5" -> {
-                        // funcionalidad
-                    }
-                }
+                pisoSeleccionado = pisos[position]
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // Qué hacer cuando no se selecciona nada en el spinner
+            }
+        }
+
+        binding.botonMapa.setOnClickListener {
+            when (pisoSeleccionado) {
+                "Piso 1" -> {
+                    sharedViewModel.setAulasDisponibles(listOf(103,105, 1, 2, 10))
+                    findNavController().navigate(R.id.piso1_nav_gallery)
+                }
+                "Piso 3" -> {
+                    sharedViewModel.setAulasDisponibles(listOf(301, 302, 303, 304, 305))
+                    findNavController().navigate(R.id.piso3_nav_gallery)
+                }
+                "Piso 4" -> {
+                    sharedViewModel.setAulasDisponibles(listOf(400, 401, 402, 403))
+                    findNavController().navigate(R.id.piso4_nav_gallery)
+                }
+                else -> {
+                    Toast.makeText(requireContext(), "Seleccione un piso válido", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
