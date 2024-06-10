@@ -7,11 +7,13 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
+    <string name="menu_home">Inicio</string>
+    <string name="menu_gallery">Mapa</string>
     <string name="menu_slideshow">Slideshow</string>
 
     <string name="selected_item">Seleccionado:</string>
+    <string name="beltran_app">Beltran App</string>
+    <string name="averigu_que_aulas_estan_libres">Averiguá que aulas estan libres!</string>
     <string-array name="pisos_array">
         <item>Piso 1</item>
         <item>Subsuelo</item>
