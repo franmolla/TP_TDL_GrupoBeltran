@@ -35,7 +35,10 @@ class HomeFragment : Fragment() {
         binding.minutosPicker.minValue = 0
         binding.minutosPicker.maxValue = 59
 
-        val str = arrayOf("AM", "PM")
+        val str = arrayOf<String>("AM", "PM")
+        binding.horarioPicker.minValue =0
+        binding.horarioPicker.maxValue = (str.size - 1)
+
         binding.horarioPicker.displayedValues = str
 
         val spinner: Spinner = binding.SpinnerPiso
