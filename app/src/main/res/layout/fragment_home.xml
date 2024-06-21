@@ -32,8 +32,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="248dp"
-        android:layout_height="166dp"
+        android:layout_width="175dp"
+        android:layout_height="160dp"
         android:layout_margin="20dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,13 +49,6 @@
 
         <NumberPicker
             android:id="@+id/minutosPicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            tools:visibility="visible" />
-
-        <NumberPicker
-            android:id="@+id/horarioPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

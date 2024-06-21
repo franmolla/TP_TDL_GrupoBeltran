@@ -23,6 +23,7 @@ class Piso5GalleryFragment : Fragment() {
     private lateinit var aula503: ImageView
     private lateinit var aula504: ImageView
     private lateinit var aula505: ImageView
+    private lateinit var aula506: ImageView
     private lateinit var aula507: ImageView
     private lateinit var aula509: ImageView
     private lateinit var aula510: ImageView
@@ -54,6 +55,7 @@ class Piso5GalleryFragment : Fragment() {
         aula503 = binding.aula503
         aula504 = binding.aula504
         aula505 = binding.aula505
+        aula506 = binding.aula506
         aula507 = binding.aula507
         aula509 = binding.aula509
         aula510 = binding.aula510
@@ -68,6 +70,7 @@ class Piso5GalleryFragment : Fragment() {
         aula503.visibility = if (aulasDisponibles.contains("503")) View.VISIBLE else View.GONE
         aula504.visibility = if (aulasDisponibles.contains("504")) View.VISIBLE else View.GONE
         aula505.visibility = if (aulasDisponibles.contains("505")) View.VISIBLE else View.GONE
+        aula506.visibility = if (aulasDisponibles.contains("506")) View.VISIBLE else View.GONE
         aula507.visibility = if (aulasDisponibles.contains("507")) View.VISIBLE else View.GONE
         aula509.visibility = if (aulasDisponibles.contains("509")) View.VISIBLE else View.GONE
         aula510.visibility = if (aulasDisponibles.contains("510")) View.VISIBLE else View.GONE

@@ -39,13 +39,11 @@ class HomeFragment : Fragment() {
 
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
-        binding.horasPicker.minValue = 0
-        binding.horasPicker.maxValue = 12
+        binding.horasPicker.minValue = 7
+        binding.horasPicker.maxValue = 23
         binding.minutosPicker.minValue = 0
         binding.minutosPicker.maxValue = 59
 
-        val str = arrayOf<String>("AM", "PM")
-        binding.horarioPicker.displayedValues = str
         val numberPicker: NumberPicker = binding.horasPicker
 
         val spinner: Spinner = binding.SpinnerPiso
