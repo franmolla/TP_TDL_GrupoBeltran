@@ -88,17 +88,29 @@ class HomeFragment : Fragment() {
 
         binding.botonMapa.setOnClickListener {
             when (pisoSeleccionado) {
+                "Subsuelo" -> {
+                    sharedViewModel.setAulasDisponibles(listOf("E1","E10", "E29", "E32", "E7", "E9"))
+                    findNavController().navigate(R.id.subsuelo_nav_gallery)
+                }
                 "Piso 1" -> {
-                    sharedViewModel.setAulasDisponibles(listOf(103,105, 1, 2, 10))
+                    sharedViewModel.setAulasDisponibles(listOf("103","105", "107", "L13", "L14"))
                     findNavController().navigate(R.id.piso1_nav_gallery)
                 }
+                "Piso 2" -> {
+                    sharedViewModel.setAulasDisponibles(listOf("211a","221","200","201","202"))
+                    findNavController().navigate(R.id.piso2_nav_gallery)
+                }
                 "Piso 3" -> {
-                    sharedViewModel.setAulasDisponibles(listOf(301, 302, 303, 304, 305))
+                    sharedViewModel.setAulasDisponibles(listOf("301", "302", "303", "304", "305"))
                     findNavController().navigate(R.id.piso3_nav_gallery)
                 }
                 "Piso 4" -> {
-                    sharedViewModel.setAulasDisponibles(listOf(400, 401, 402, 403))
+                    sharedViewModel.setAulasDisponibles(listOf("400", "401", "402", "403"))
                     findNavController().navigate(R.id.piso4_nav_gallery)
+                }
+                "Piso 5" -> {
+                    sharedViewModel.setAulasDisponibles(listOf("500", "501", "502", "503", "512"))
+                    findNavController().navigate(R.id.piso5_nav_gallery)
                 }
                 else -> {
                     Toast.makeText(requireContext(), "Seleccione un piso válido", Toast.LENGTH_SHORT).show()

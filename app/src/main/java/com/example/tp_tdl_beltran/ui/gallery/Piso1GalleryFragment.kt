@@ -45,7 +45,7 @@ class Piso1GalleryFragment : Fragment() {
         inicializarVistas()
 
         sharedViewModel.aulasDisponibles.observe(viewLifecycleOwner) { aulasDisponibles ->
-            mostrarAulasDisponiblesPiso3(aulasDisponibles)
+            mostrarAulasDisponiblesPiso1(aulasDisponibles)
         }
 
         return view
@@ -70,21 +70,21 @@ class Piso1GalleryFragment : Fragment() {
         piso1Mapa = binding.piso1Mapa
     }
 
-    fun mostrarAulasDisponiblesPiso3(aulasDisponibles: List<Int>) {
-        aula103.visibility = if (aulasDisponibles.contains(103)) View.VISIBLE else View.GONE
-        aula105.visibility = if (aulasDisponibles.contains(105)) View.VISIBLE else View.GONE
-        aula107.visibility = if (aulasDisponibles.contains(107)) View.VISIBLE else View.GONE
-        aulaL1.visibility = if (aulasDisponibles.contains(1)) View.VISIBLE else View.GONE
-        aulaL10.visibility = if (aulasDisponibles.contains(10)) View.VISIBLE else View.GONE
-        aulaL11.visibility = if (aulasDisponibles.contains(11)) View.VISIBLE else View.GONE
-        aulaL13.visibility = if (aulasDisponibles.contains(13)) View.VISIBLE else View.GONE
-        aulaL14.visibility = if (aulasDisponibles.contains(14)) View.VISIBLE else View.GONE
-        aulaL2.visibility = if (aulasDisponibles.contains(2)) View.VISIBLE else View.GONE
-        aulaL3.visibility = if (aulasDisponibles.contains(3)) View.VISIBLE else View.GONE
-        aulaL5.visibility = if (aulasDisponibles.contains(5)) View.VISIBLE else View.GONE
-        aulaL6.visibility = if (aulasDisponibles.contains(6)) View.VISIBLE else View.GONE
-        aulaL7.visibility = if (aulasDisponibles.contains(7)) View.VISIBLE else View.GONE
-        aulaL8.visibility = if (aulasDisponibles.contains(8)) View.VISIBLE else View.GONE
+    fun mostrarAulasDisponiblesPiso1(aulasDisponibles: List<String>) {
+        aula103.visibility = if (aulasDisponibles.contains("103")) View.VISIBLE else View.GONE
+        aula105.visibility = if (aulasDisponibles.contains("105")) View.VISIBLE else View.GONE
+        aula107.visibility = if (aulasDisponibles.contains("107")) View.VISIBLE else View.GONE
+        aulaL1.visibility = if (aulasDisponibles.contains("L1")) View.VISIBLE else View.GONE
+        aulaL10.visibility = if (aulasDisponibles.contains("L10")) View.VISIBLE else View.GONE
+        aulaL11.visibility = if (aulasDisponibles.contains("L11")) View.VISIBLE else View.GONE
+        aulaL13.visibility = if (aulasDisponibles.contains("L13")) View.VISIBLE else View.GONE
+        aulaL14.visibility = if (aulasDisponibles.contains("L14")) View.VISIBLE else View.GONE
+        aulaL2.visibility = if (aulasDisponibles.contains("L2")) View.VISIBLE else View.GONE
+        aulaL3.visibility = if (aulasDisponibles.contains("L3")) View.VISIBLE else View.GONE
+        aulaL5.visibility = if (aulasDisponibles.contains("L5")) View.VISIBLE else View.GONE
+        aulaL6.visibility = if (aulasDisponibles.contains("L6")) View.VISIBLE else View.GONE
+        aulaL7.visibility = if (aulasDisponibles.contains("L7")) View.VISIBLE else View.GONE
+        aulaL8.visibility = if (aulasDisponibles.contains("L8")) View.VISIBLE else View.GONE
         piso1Aulas.visibility = View.VISIBLE
         piso1Mapa.visibility = View.VISIBLE
     }

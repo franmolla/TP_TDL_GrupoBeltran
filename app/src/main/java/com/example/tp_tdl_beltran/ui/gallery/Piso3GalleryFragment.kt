@@ -58,15 +58,15 @@ class Piso3GalleryFragment : Fragment() {
         piso3Mapa = binding.piso3Mapa
     }
 
-    fun mostrarAulasDisponiblesPiso3(aulasDisponibles: List<Int>) {
-        aula301.visibility = if (aulasDisponibles.contains(301)) View.VISIBLE else View.GONE
-        aula302.visibility = if (aulasDisponibles.contains(302)) View.VISIBLE else View.GONE
-        aula303.visibility = if (aulasDisponibles.contains(303)) View.VISIBLE else View.GONE
-        aula304.visibility = if (aulasDisponibles.contains(304)) View.VISIBLE else View.GONE
-        aula305.visibility = if (aulasDisponibles.contains(305)) View.VISIBLE else View.GONE
-        aula310.visibility = if (aulasDisponibles.contains(310)) View.VISIBLE else View.GONE
-        aula313.visibility = if (aulasDisponibles.contains(313)) View.VISIBLE else View.GONE
-        aula319.visibility = if (aulasDisponibles.contains(319)) View.VISIBLE else View.GONE
+    fun mostrarAulasDisponiblesPiso3(aulasDisponibles: List<String>) {
+        aula301.visibility = if (aulasDisponibles.contains("301")) View.VISIBLE else View.GONE
+        aula302.visibility = if (aulasDisponibles.contains("302")) View.VISIBLE else View.GONE
+        aula303.visibility = if (aulasDisponibles.contains("303")) View.VISIBLE else View.GONE
+        aula304.visibility = if (aulasDisponibles.contains("304")) View.VISIBLE else View.GONE
+        aula305.visibility = if (aulasDisponibles.contains("305")) View.VISIBLE else View.GONE
+        aula310.visibility = if (aulasDisponibles.contains("310")) View.VISIBLE else View.GONE
+        aula313.visibility = if (aulasDisponibles.contains("313")) View.VISIBLE else View.GONE
+        aula319.visibility = if (aulasDisponibles.contains("319")) View.VISIBLE else View.GONE
         piso3Aulas.visibility = View.VISIBLE
         piso3Mapa.visibility = View.VISIBLE
     }

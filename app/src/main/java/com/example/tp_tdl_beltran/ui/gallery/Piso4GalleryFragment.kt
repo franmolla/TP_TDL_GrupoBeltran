@@ -68,20 +68,20 @@ class Piso4GalleryFragment : Fragment() {
         piso4Mapa = binding.piso4Mapa
     }
 
-    fun mostrarAulasDisponiblesPiso4(aulasDisponibles: List<Int>) {
-        aula400.visibility = if (aulasDisponibles.contains(400)) View.VISIBLE else View.GONE
-        aula401.visibility = if (aulasDisponibles.contains(401)) View.VISIBLE else View.GONE
-        aula402.visibility = if (aulasDisponibles.contains(402)) View.VISIBLE else View.GONE
-        aula403.visibility = if (aulasDisponibles.contains(403)) View.VISIBLE else View.GONE
-        aula405.visibility = if (aulasDisponibles.contains(405)) View.VISIBLE else View.GONE
-        aula407.visibility = if (aulasDisponibles.contains(407)) View.VISIBLE else View.GONE
-        aula408.visibility = if (aulasDisponibles.contains(408)) View.VISIBLE else View.GONE
-        aula411.visibility = if (aulasDisponibles.contains(411)) View.VISIBLE else View.GONE
-        aula412.visibility = if (aulasDisponibles.contains(412)) View.VISIBLE else View.GONE
-        aula414.visibility = if (aulasDisponibles.contains(414)) View.VISIBLE else View.GONE
-        aula416.visibility = if (aulasDisponibles.contains(416)) View.VISIBLE else View.GONE
-        aula417.visibility = if (aulasDisponibles.contains(417)) View.VISIBLE else View.GONE
-        aula430.visibility = if (aulasDisponibles.contains(430)) View.VISIBLE else View.GONE
+    fun mostrarAulasDisponiblesPiso4(aulasDisponibles: List<String>) {
+        aula400.visibility = if (aulasDisponibles.contains("400")) View.VISIBLE else View.GONE
+        aula401.visibility = if (aulasDisponibles.contains("401")) View.VISIBLE else View.GONE
+        aula402.visibility = if (aulasDisponibles.contains("402")) View.VISIBLE else View.GONE
+        aula403.visibility = if (aulasDisponibles.contains("403")) View.VISIBLE else View.GONE
+        aula405.visibility = if (aulasDisponibles.contains("405")) View.VISIBLE else View.GONE
+        aula407.visibility = if (aulasDisponibles.contains("407")) View.VISIBLE else View.GONE
+        aula408.visibility = if (aulasDisponibles.contains("408")) View.VISIBLE else View.GONE
+        aula411.visibility = if (aulasDisponibles.contains("411")) View.VISIBLE else View.GONE
+        aula412.visibility = if (aulasDisponibles.contains("412")) View.VISIBLE else View.GONE
+        aula414.visibility = if (aulasDisponibles.contains("414")) View.VISIBLE else View.GONE
+        aula416.visibility = if (aulasDisponibles.contains("416")) View.VISIBLE else View.GONE
+        aula417.visibility = if (aulasDisponibles.contains("417")) View.VISIBLE else View.GONE
+        aula430.visibility = if (aulasDisponibles.contains("430")) View.VISIBLE else View.GONE
         piso4Aulas.visibility = View.VISIBLE
         piso4Mapa.visibility = View.VISIBLE
     }

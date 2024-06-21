@@ -12,8 +12,26 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/subsuelo_nav_gallery"
+        android:name="com.example.tp_tdl_beltran.ui.gallery.SubsueloGalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
         android:id="@+id/piso1_nav_gallery"
         android:name="com.example.tp_tdl_beltran.ui.gallery.Piso1GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/piso2_nav_gallery"
+        android:name="com.example.tp_tdl_beltran.ui.gallery.Piso2GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/piso3_nav_gallery"
+        android:name="com.example.tp_tdl_beltran.ui.gallery.Piso3GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
@@ -24,8 +42,8 @@
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/piso3_nav_gallery"
-        android:name="com.example.tp_tdl_beltran.ui.gallery.Piso3GalleryFragment"
+        android:id="@+id/piso5_nav_gallery"
+        android:name="com.example.tp_tdl_beltran.ui.gallery.Piso5GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
