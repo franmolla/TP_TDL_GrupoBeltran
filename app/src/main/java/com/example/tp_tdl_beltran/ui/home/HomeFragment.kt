@@ -1,6 +1,7 @@
 package com.example.tp_tdl_beltran.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,10 @@ import com.example.tp_tdl_beltran.R
 import com.example.tp_tdl_beltran.databinding.FragmentHomeBinding
 import com.example.tp_tdl_beltran.ui.shared.SharedViewModel
 import com.google.android.material.button.MaterialButtonToggleGroup
-
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class HomeFragment : Fragment() {
 
@@ -28,6 +32,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -40,13 +45,10 @@ class HomeFragment : Fragment() {
         binding.minutosPicker.maxValue = 59
 
         val str = arrayOf<String>("AM", "PM")
-        binding.horarioPicker.minValue =0
-        binding.horarioPicker.maxValue = (str.size - 1)
-
         binding.horarioPicker.displayedValues = str
+        val numberPicker: NumberPicker = binding.horasPicker
 
         val spinner: Spinner = binding.SpinnerPiso
-        val numberPicker: NumberPicker = binding.horasPicker
         val textView: TextView = binding.multilineTextView
         val toggleButtonGroup: MaterialButtonToggleGroup = binding.toggleButtonGroup
 
@@ -118,9 +120,47 @@ class HomeFragment : Fragment() {
 
         return root
     }
+
+
+    fun buscarAulas(
+        pisoSeleccionado: String,
+        horaSeleccionada: Int,
+        diaSeleccionado: String,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        val database = FirebaseDatabase.getInstance().reference.child("Sheet1")
+
+        val query = database.orderByChild("day").equalTo(diaSeleccionado)
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val aulasEncontradas = mutableListOf<String>()
+
+                for (aulaSnapshot in snapshot.children) {
+                    val aula = aulaSnapshot.getValue(Aula::class.java)
+
+                    if (aula != null && aula.room.isNotEmpty() &&
+                        aula.getHoraField(horaSeleccionada) == "X" &&
+                        aula.getPisoField(pisoSeleccionado) == "X") {
+                        aulasEncontradas.add(aula.room)
+                    }
+                }
+
+                val result = aulasEncontradas.joinToString(", ")
+
+                onSuccess(result)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                onFailure(error.message)
+            }
+        })
+    }
+
     private fun updateTextView(spinner: Spinner, numberPicker: NumberPicker, toggleButtonGroup: MaterialButtonToggleGroup, textView: TextView) {
+
+        var horarioSeleccionado = numberPicker.value
         val pisoSeleccionado = spinner.selectedItem.toString()
-        val horaSeleccionada = numberPicker.value
         val selectedButtonId = toggleButtonGroup.checkedButtonId
         val diaSeleccionado = when (selectedButtonId) {
             R.id.Lunes -> "Lunes"
@@ -131,8 +171,18 @@ class HomeFragment : Fragment() {
             R.id.Sabado -> "Sábado"
             else -> "Ninguno"
         }
-        val result = "Spinner: $pisoSeleccionado, NumberPicker: $horaSeleccionada, Día: $diaSeleccionado"
-        textView.text = result
+
+        buscarAulas(pisoSeleccionado, horarioSeleccionado, diaSeleccionado,
+            onSuccess = { result ->
+
+                val aulasPorLinea = "Las aulas libres son:\n$result"
+                textView.text = aulasPorLinea
+            },
+            onFailure = { error ->
+                // Por si falla algo
+                Log.e("Firebase", "Error al buscar aulas: $error")
+            }
+        )
 
     }
     override fun onDestroyView() {

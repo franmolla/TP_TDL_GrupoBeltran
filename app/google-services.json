@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "252239954246",
+    "firebase_url": "https://app-beltran-default-rtdb.firebaseio.com",
+    "project_id": "app-beltran",
+    "storage_bucket": "app-beltran.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252239954246:android:65b1b5b724bdfc710ae547",
+        "android_client_info": {
+          "package_name": "com.example.tp_tdl_beltran"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmBoCgxYn7tQVW1BYWLk4J_RN05OdQwvY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
