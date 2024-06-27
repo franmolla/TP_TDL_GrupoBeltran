@@ -26,30 +26,25 @@
     <fragment
         android:id="@+id/piso2_nav_gallery"
         android:name="com.example.tp_tdl_beltran.ui.gallery.Piso2GalleryFragment"
-        android:label="@string/mapa_p1"
+        android:label="@string/mapa_p2"
         tools:layout="@layout/piso2_fragment_gallery" />
 
     <fragment
         android:id="@+id/piso3_nav_gallery"
         android:name="com.example.tp_tdl_beltran.ui.gallery.Piso3GalleryFragment"
-        android:label="@string/mapa_p1"
+        android:label="@string/mapa_p3"
         tools:layout="@layout/piso3_fragment_gallery" />
 
     <fragment
         android:id="@+id/piso4_nav_gallery"
         android:name="com.example.tp_tdl_beltran.ui.gallery.Piso4GalleryFragment"
-        android:label="@string/mapa_p1"
+        android:label="@string/mapa_p4"
         tools:layout="@layout/piso4_fragment_gallery" />
 
     <fragment
         android:id="@+id/piso5_nav_gallery"
         android:name="com.example.tp_tdl_beltran.ui.gallery.Piso5GalleryFragment"
-        android:label="@string/mapa_p1"
+        android:label="@string/mapa_p5"
         tools:layout="@layout/piso5_fragment_gallery" />
 
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.tp_tdl_beltran.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
 </navigation>

@@ -9,6 +9,10 @@
 
     <string name="menu_home">Inicio</string>
     <string name="mapa_p1">Mapa del Piso 1</string>
+    <string name="mapa_p2">Mapa del Piso 2</string>
+    <string name="mapa_p3">Mapa del Piso 3</string>
+    <string name="mapa_p4">Mapa del Piso 4</string>
+    <string name="mapa_p5">Mapa del Piso 5</string>
     <string name="mapa_sub">Mapa del Subsuelo</string>
     <string name="menu_slideshow">Slideshow</string>
 

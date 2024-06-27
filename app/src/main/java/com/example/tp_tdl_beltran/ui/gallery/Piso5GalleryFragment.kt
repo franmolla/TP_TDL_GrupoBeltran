@@ -62,6 +62,8 @@ class Piso5GalleryFragment : Fragment() {
         aula512 = binding.aula512
         piso5Aulas = binding.piso5Aulas
         piso5Mapa = binding.piso5Mapa
+        piso5Aulas.visibility = View.VISIBLE
+        piso5Mapa.visibility = View.VISIBLE
     }
     fun mostrarAulasDisponiblesPiso5(aulasDisponibles: List<String>) {
         aula500.visibility = if (aulasDisponibles.contains("500")) View.VISIBLE else View.GONE
