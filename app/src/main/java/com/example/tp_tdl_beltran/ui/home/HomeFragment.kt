@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.NumberPicker
 import android.widget.Spinner
@@ -30,7 +29,8 @@ class HomeFragment : Fragment() {
     private lateinit var sharedViewModel: SharedViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
 
     ): View {
@@ -63,28 +63,27 @@ class HomeFragment : Fragment() {
 
         var pisoSeleccionado = ""
 
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
-                position: Int,
-                id: Long
-            ) {
+//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(
+//                parent: AdapterView<*>,
+//                view: View,
+//                position: Int,
+//                id: Long
+//            ) {
+//                updateTextView(spinner, numberPicker, toggleButtonGroup, textView)
+//                Toast.makeText(
+//                    requireContext(),
+//                    getString(R.string.selected_item) + " " + pisos[position],
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//                pisoSeleccionado = pisos[position]
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>) {
+//                // Qué hacer cuando no se selecciona nada en el spinner
+//            }
+//        }
 
-                updateTextView(spinner, numberPicker, toggleButtonGroup, textView)
-
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.selected_item) + " " + pisos[position],
-                    Toast.LENGTH_SHORT
-                ).show()
-                pisoSeleccionado = pisos[position]
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Qué hacer cuando no se selecciona nada en el spinner
-            }
-        }
 
         binding.botonMapa.setOnClickListener {
             var horarioSeleccionado = numberPicker.value
@@ -151,8 +150,8 @@ class HomeFragment : Fragment() {
             }
         }
 
-        return root
-    }
+       return root
+    }}
 
 
     fun buscarAulas(
@@ -191,6 +190,7 @@ class HomeFragment : Fragment() {
         })
     }
 
+
     private fun updateTextView(spinner: Spinner, numberPicker: NumberPicker, toggleButtonGroup: MaterialButtonToggleGroup, textView: TextView) {
 
         var horarioSeleccionado = numberPicker.value
@@ -219,8 +219,8 @@ class HomeFragment : Fragment() {
             }
         )
     }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-}
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        _binding = null
+//    }
+//}

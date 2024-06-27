@@ -9,9 +9,13 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/subsuelo_nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:title="@string/mapa_sub" />
+        <item
+            android:id="@+id/piso1_nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/mapa_p1" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"

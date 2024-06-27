@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.tp_tdl_beltran.databinding.FragmentGalleryBinding
+import com.example.tp_tdl_beltran.databinding.Piso4FragmentGalleryBinding
 import com.example.tp_tdl_beltran.ui.shared.SharedViewModel
 
 class Piso4GalleryFragment : Fragment() {
 
-    private var _binding: FragmentGalleryBinding? = null
+    private var _binding: Piso4FragmentGalleryBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var sharedViewModel: SharedViewModel
@@ -37,7 +37,7 @@ class Piso4GalleryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentGalleryBinding.inflate(inflater, container, false)
+        _binding = Piso4FragmentGalleryBinding.inflate(inflater, container, false)
         val view = binding.root
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 

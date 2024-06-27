@@ -64,6 +64,9 @@ class SubsueloGalleryFragment : Fragment() {
         aulaE9 = binding.aulaE9
         subsueloAulas = binding.subsueloAulas
         subsueloMapa = binding.subsueloMapa
+
+        subsueloAulas.visibility = View.VISIBLE
+        subsueloMapa.visibility = View.VISIBLE
     }
     fun mostrarAulasDisponiblesSubsuelo(aulasDisponibles: List<String>) {
         aulaE1.visibility = if (aulasDisponibles.contains("E1")) View.VISIBLE else View.GONE

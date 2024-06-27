@@ -68,6 +68,9 @@ class Piso1GalleryFragment : Fragment() {
         aulaL8 = binding.aulaL8
         piso1Aulas = binding.piso1Aulas
         piso1Mapa = binding.piso1Mapa
+
+        piso1Aulas.visibility = View.VISIBLE
+        piso1Mapa.visibility = View.VISIBLE
     }
 
     fun mostrarAulasDisponiblesPiso1(aulasDisponibles: List<String>) {
