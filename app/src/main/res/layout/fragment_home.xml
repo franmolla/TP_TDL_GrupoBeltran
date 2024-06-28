@@ -6,38 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <LinearLayout
-        android:layout_width="345dp"
-        android:layout_height="282dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="100dp"
-        android:background="@drawable/dialog_background"
-        android:orientation="vertical"
-        android:padding="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="parent"
+    <TextView
+        android:id="@+id/textViewWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bienvenido_a_la_reserva_de_aulas"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
-            android:id="@+id/textViewMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="@string/est_s_seguro_de_reservar_el_aula"
-            android:textAlignment="center"
-            android:textSize="18sp" />
+    <TextView
+        android:id="@+id/textViewInstructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/selecciona_la_hora_d_a_y_piso_para_tu_reserva"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWelcome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <Button
-            android:id="@+id/buttonConfirm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="@string/confirmar"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -52,7 +47,7 @@
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.422">
+        app:layout_constraintVertical_bias="0.47000003">
 
         <Button
             android:id="@+id/botonMapa"
@@ -68,9 +63,11 @@
         android:layout_height="160dp"
         android:layout_margin="20dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.29000002">
 
         <NumberPicker
             android:id="@+id/horasPicker"
@@ -92,7 +89,7 @@
         android:layout_height="0dp"
 
         android:layout_marginStart="-225dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="48dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -125,14 +122,14 @@
         android:id="@+id/toggleButtonGroup"
         android:layout_width="300dp"
         android:layout_height="61dp"
-        android:layout_marginTop="-50dp"
+        android:layout_marginTop="-10dp"
         android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.422"
+        app:layout_constraintVertical_bias="0.47000003"
         app:singleSelection="true">
 
         <Button

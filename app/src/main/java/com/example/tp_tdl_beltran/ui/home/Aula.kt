@@ -25,9 +25,10 @@ data class Aula(
     val piso3: String? = null,
     val piso4: String? = null,
     val piso5: String? = null,
-    val Subsuelo: String? = null
+    val Subsuelo: String? = null,
+    val reservada: Boolean = false
+
 ) {
-    // Método para obtener el campo de hora correspondiente
     fun getHoraField(horaSeleccionada: Int): String? {
         return when (horaSeleccionada) {
             7 -> this.`7`
@@ -51,7 +52,6 @@ data class Aula(
         }
     }
 
-    // Método para obtener el campo de piso seleccionado
     fun getPisoField(pisoSeleccionado: String): String? {
         return when (pisoSeleccionado) {
             "Piso 1" -> this.piso1

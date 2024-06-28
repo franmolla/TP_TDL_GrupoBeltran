@@ -13,6 +13,7 @@ import android.widget.NumberPicker
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -46,7 +47,6 @@ class HomeFragment : Fragment() {
         binding.minutosPicker.maxValue = 59
 
         val numberPicker: NumberPicker = binding.horasPicker
-
         val spinner: Spinner = binding.SpinnerPiso
         val buttonContainer: LinearLayout = binding.buttonContainer
         val toggleButtonGroup: MaterialButtonToggleGroup = binding.toggleButtonGroup
@@ -67,7 +67,6 @@ class HomeFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
                 updateButtons(spinner, numberPicker, toggleButtonGroup, buttonContainer)
-
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -149,31 +148,6 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-//    private fun updateTextView(spinner: Spinner, numberPicker: NumberPicker, toggleButtonGroup: MaterialButtonToggleGroup, textView: TextView) {
-//        val horarioSeleccionado = numberPicker.value
-//        val pisoSeleccionado = spinner.selectedItem.toString()
-//        val selectedButtonId = toggleButtonGroup.checkedButtonId
-//        val diaSeleccionado = when (selectedButtonId) {
-//            R.id.Lunes -> "Lunes"
-//            R.id.Martes -> "Martes"
-//            R.id.Miercoles -> "Miércoles"
-//            R.id.Jueves -> "Jueves"
-//            R.id.Viernes -> "Viernes"
-//            R.id.Sabado -> "Sábado"
-//            else -> "Ninguno"
-//        }
-//
-//        buscarAulas(pisoSeleccionado, horarioSeleccionado, diaSeleccionado,
-//            onSuccess = { result ->
-//                val aulasPorLinea = "Las aulas libres son:\n$result"
-//                textView.text = aulasPorLinea
-//            },
-//            onFailure = { error ->
-//                // Por si falla algo
-//                Log.e("Firebase", "Error al buscar aulas: $error")
-//            }
-//        )
-//    }
     private fun updateButtons(spinner: Spinner, numberPicker: NumberPicker, toggleButtonGroup: MaterialButtonToggleGroup, buttonContainer: LinearLayout) {
         val horarioSeleccionado = numberPicker.value
         val pisoSeleccionado = spinner.selectedItem.toString()
@@ -184,7 +158,7 @@ class HomeFragment : Fragment() {
             R.id.Miercoles -> "Miércoles"
             R.id.Jueves -> "Jueves"
             R.id.Viernes -> "Viernes"
-            R.id.Sabado -> "Sábado"
+            R.id.Sabado -> "Sabado"
             else -> "Ninguno"
         }
 
@@ -196,7 +170,12 @@ class HomeFragment : Fragment() {
                     val button = Button(requireContext()).apply {
                         text = aula
                         setOnClickListener {
-                            Toast.makeText(requireContext(), "Apretaste el aula: $aula", Toast.LENGTH_SHORT).show()
+                            val dialog = AulaDialogFragment(aula) { aulaReservada ->
+                                reservarAula(aulaReservada, pisoSeleccionado, horarioSeleccionado, diaSeleccionado) {
+                                    updateButtons(spinner, numberPicker, toggleButtonGroup, buttonContainer)
+                                }
+                            }
+                            dialog.show(parentFragmentManager, "AulaDialogFragment")
                         }
                     }
                     buttonContainer.addView(button)
@@ -208,6 +187,29 @@ class HomeFragment : Fragment() {
             }
         )
     }
+
+    private fun reservarAula(aula: String, pisoSeleccionado: String, horaSeleccionada: Int, diaSeleccionado: String, onComplete: () -> Unit) {
+        val database = FirebaseDatabase.getInstance().reference.child("Sheet1")
+
+        val query = database.orderByChild("room").equalTo(aula)
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (aulaSnapshot in snapshot.children) {
+                    val aulaObj = aulaSnapshot.getValue(Aula::class.java)
+                    if (aulaObj != null && aulaObj.day == diaSeleccionado && aulaObj.getPisoField(pisoSeleccionado) == "X" && aulaObj.getHoraField(horaSeleccionada) == "X") {
+                        aulaSnapshot.ref.child(horaSeleccionada.toString()).setValue(null).addOnCompleteListener {
+                            onComplete()
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Firebase", "Error al reservar aula: $error")
+            }
+        })
+    }
+
     fun buscarAulas(
         pisoSeleccionado: String,
         horaSeleccionada: Int,
@@ -240,5 +242,40 @@ class HomeFragment : Fragment() {
                 onFailure(error.message)
             }
         })
+    }
+}
+
+class AulaDialogFragment(
+    private val aula: String,
+    private val onConfirm: (String) -> Unit
+) : DialogFragment() {
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.dialog_layout, container, false)
+
+        // Set the dialog text
+        val dialogText = view.findViewById<TextView>(R.id.dialogText)
+        dialogText.text = "Desea reservar el Aula $aula por una hora?"
+
+        // Set the confirm button action
+        val confirmButton = view.findViewById<Button>(R.id.confirmButton)
+        confirmButton.setOnClickListener {
+            onConfirm(aula)
+            dismiss()
+        }
+
+        return view
+    }
+
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setLayout(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
     }
 }
