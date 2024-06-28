@@ -5,11 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.NumberPicker
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -29,10 +33,8 @@ class HomeFragment : Fragment() {
     private lateinit var sharedViewModel: SharedViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -45,11 +47,9 @@ class HomeFragment : Fragment() {
         binding.minutosPicker.maxValue = 59
 
         val numberPicker: NumberPicker = binding.horasPicker
-
         val spinner: Spinner = binding.SpinnerPiso
-        val textView: TextView = binding.multilineTextView
+        val buttonContainer: LinearLayout = binding.buttonContainer
         val toggleButtonGroup: MaterialButtonToggleGroup = binding.toggleButtonGroup
-
 
         val pisos = resources.getStringArray(R.array.pisos_array)
         val adapter = ArrayAdapter(
@@ -59,34 +59,24 @@ class HomeFragment : Fragment() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
-        updateTextView(spinner, numberPicker, toggleButtonGroup, textView)
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.selected_item) + " " + pisos[position],
+                    Toast.LENGTH_SHORT
+                ).show()
+                updateButtons(spinner, numberPicker, toggleButtonGroup, buttonContainer)
+            }
 
-        var pisoSeleccionado = ""
-
-//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(
-//                parent: AdapterView<*>,
-//                view: View,
-//                position: Int,
-//                id: Long
-//            ) {
-//                updateTextView(spinner, numberPicker, toggleButtonGroup, textView)
-//                Toast.makeText(
-//                    requireContext(),
-//                    getString(R.string.selected_item) + " " + pisos[position],
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//                pisoSeleccionado = pisos[position]
-//            }
-//
-//            override fun onNothingSelected(parent: AdapterView<*>) {
-//                // Qué hacer cuando no se selecciona nada en el spinner
-//            }
-//        }
-
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                Log.d("HomeFragment", "onNothingSelected called")
+                // Manejar cuando no se selecciona nada
+            }
+        }
 
         binding.botonMapa.setOnClickListener {
-            var horarioSeleccionado = numberPicker.value
+            val horarioSeleccionado = numberPicker.value
             val pisoSeleccionado = spinner.selectedItem.toString()
             val selectedButtonId = toggleButtonGroup.checkedButtonId
             val diaSeleccionado = when (selectedButtonId) {
@@ -99,7 +89,7 @@ class HomeFragment : Fragment() {
                 else -> "Ninguno"
             }
 
-            buscarAulas(horarioSeleccionado, diaSeleccionado,
+            buscarAulas(pisoSeleccionado, horarioSeleccionado, diaSeleccionado,
                 onSuccess = { result ->
                     val aulasEncontradas = result.split(", ")
                     when (pisoSeleccionado) {
@@ -141,20 +131,87 @@ class HomeFragment : Fragment() {
         }
 
         numberPicker.setOnValueChangedListener { _, _, _ ->
-            updateTextView(spinner, numberPicker, toggleButtonGroup, textView)
+            updateButtons(spinner, numberPicker, toggleButtonGroup, buttonContainer)
         }
 
         toggleButtonGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
             if (isChecked) {
-                updateTextView(spinner, numberPicker, toggleButtonGroup, textView)
+                updateButtons(spinner, numberPicker, toggleButtonGroup, buttonContainer)
             }
         }
 
-       return root
-    }}
+        return root
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun updateButtons(spinner: Spinner, numberPicker: NumberPicker, toggleButtonGroup: MaterialButtonToggleGroup, buttonContainer: LinearLayout) {
+        val horarioSeleccionado = numberPicker.value
+        val pisoSeleccionado = spinner.selectedItem.toString()
+        val selectedButtonId = toggleButtonGroup.checkedButtonId
+        val diaSeleccionado = when (selectedButtonId) {
+            R.id.Lunes -> "Lunes"
+            R.id.Martes -> "Martes"
+            R.id.Miercoles -> "Miércoles"
+            R.id.Jueves -> "Jueves"
+            R.id.Viernes -> "Viernes"
+            R.id.Sabado -> "Sabado"
+            else -> "Ninguno"
+        }
+
+        buscarAulas(pisoSeleccionado, horarioSeleccionado, diaSeleccionado,
+            onSuccess = { result ->
+                buttonContainer.removeAllViews()
+                val aulas = result.split(", ")
+                for (aula in aulas) {
+                    val button = Button(requireContext()).apply {
+                        text = aula
+                        setOnClickListener {
+                            val dialog = AulaDialogFragment(aula) { aulaReservada ->
+                                reservarAula(aulaReservada, pisoSeleccionado, horarioSeleccionado, diaSeleccionado) {
+                                    updateButtons(spinner, numberPicker, toggleButtonGroup, buttonContainer)
+                                }
+                            }
+                            dialog.show(parentFragmentManager, "AulaDialogFragment")
+                        }
+                    }
+                    buttonContainer.addView(button)
+                }
+            },
+            onFailure = { error ->
+                // Por si falla algo
+                Log.e("Firebase", "Error al buscar aulas: $error")
+            }
+        )
+    }
+
+    private fun reservarAula(aula: String, pisoSeleccionado: String, horaSeleccionada: Int, diaSeleccionado: String, onComplete: () -> Unit) {
+        val database = FirebaseDatabase.getInstance().reference.child("Sheet1")
+
+        val query = database.orderByChild("room").equalTo(aula)
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (aulaSnapshot in snapshot.children) {
+                    val aulaObj = aulaSnapshot.getValue(Aula::class.java)
+                    if (aulaObj != null && aulaObj.day == diaSeleccionado && aulaObj.getPisoField(pisoSeleccionado) == "X" && aulaObj.getHoraField(horaSeleccionada) == "X") {
+                        aulaSnapshot.ref.child(horaSeleccionada.toString()).setValue(null).addOnCompleteListener {
+                            onComplete()
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Firebase", "Error al reservar aula: $error")
+            }
+        })
+    }
 
     fun buscarAulas(
+        pisoSeleccionado: String,
         horaSeleccionada: Int,
         diaSeleccionado: String,
         onSuccess: (String) -> Unit,
@@ -171,14 +228,13 @@ class HomeFragment : Fragment() {
                     val aula = aulaSnapshot.getValue(Aula::class.java)
 
                     if (aula != null && aula.room.isNotEmpty() &&
-                        aula.getHoraField(horaSeleccionada) == "X") {
+                        aula.getHoraField(horaSeleccionada) == "X" &&
+                        aula.getPisoField(pisoSeleccionado) == "X") {
                         aulasEncontradas.add(aula.room)
                     }
                 }
 
                 val result = aulasEncontradas.joinToString(", ")
-
-
                 onSuccess(result)
             }
 
@@ -187,38 +243,39 @@ class HomeFragment : Fragment() {
             }
         })
     }
+}
 
+class AulaDialogFragment(
+    private val aula: String,
+    private val onConfirm: (String) -> Unit
+) : DialogFragment() {
 
-    private fun updateTextView(spinner: Spinner, numberPicker: NumberPicker, toggleButtonGroup: MaterialButtonToggleGroup, textView: TextView) {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.dialog_layout, container, false)
 
-        var horarioSeleccionado = numberPicker.value
-        val pisoSeleccionado = spinner.selectedItem.toString()
-        val selectedButtonId = toggleButtonGroup.checkedButtonId
-        val diaSeleccionado = when (selectedButtonId) {
-            R.id.Lunes -> "Lunes"
-            R.id.Martes -> "Martes"
-            R.id.Miercoles -> "Miércoles"
-            R.id.Jueves -> "Jueves"
-            R.id.Viernes -> "Viernes"
-            R.id.Sabado -> "Sábado"
-            else -> "Ninguno"
+        // Set the dialog text
+        val dialogText = view.findViewById<TextView>(R.id.dialogText)
+        dialogText.text = "Desea reservar el Aula $aula por una hora?"
+
+        // Set the confirm button action
+        val confirmButton = view.findViewById<Button>(R.id.confirmButton)
+        confirmButton.setOnClickListener {
+            onConfirm(aula)
+            dismiss()
         }
 
-        buscarAulas(horarioSeleccionado, diaSeleccionado,
-            onSuccess = { result ->
+        return view
+    }
 
-                val aulasPorLinea = "Las aulas libres son:\n$result"
-                textView.text = aulasPorLinea
-
-            },
-            onFailure = { error ->
-                // Por si falla algo
-                Log.e("Firebase", "Error al buscar aulas: $error")
-            }
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setLayout(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
         )
     }
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        _binding = null
-//    }
-//}
+}

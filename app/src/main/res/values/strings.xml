@@ -20,6 +20,11 @@
     <string name="beltran_app">Beltran App</string>
     <string name="averigu_que_aulas_estan_libres">Averiguá que aulas estan libres!</string>
     <string name="mapa">MAPA</string>
+    <string name="scroll_view_description">Lista de aulas disponibles</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="est_s_seguro_de_reservar_el_aula">¿Estás seguro de reservar el aula?</string>
+    <string name="bienvenido_a_la_reserva_de_aulas">Bienvenido a la reserva de aulas</string>
+    <string name="selecciona_la_hora_d_a_y_piso_para_tu_reserva">Selecciona la hora y el dia para tu reserva</string>
     <string-array name="pisos_array">
         <item>Piso 1</item>
         <item>Subsuelo</item>
