@@ -5,7 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.NumberPicker
 import android.widget.Spinner
 import android.widget.TextView
@@ -29,10 +32,8 @@ class HomeFragment : Fragment() {
     private lateinit var sharedViewModel: SharedViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -47,9 +48,8 @@ class HomeFragment : Fragment() {
         val numberPicker: NumberPicker = binding.horasPicker
 
         val spinner: Spinner = binding.SpinnerPiso
-        val textView: TextView = binding.multilineTextView
+        val buttonContainer: LinearLayout = binding.buttonContainer
         val toggleButtonGroup: MaterialButtonToggleGroup = binding.toggleButtonGroup
-
 
         val pisos = resources.getStringArray(R.array.pisos_array)
         val adapter = ArrayAdapter(
@@ -59,34 +59,25 @@ class HomeFragment : Fragment() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
-        updateTextView(spinner, numberPicker, toggleButtonGroup, textView)
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.selected_item) + " " + pisos[position],
+                    Toast.LENGTH_SHORT
+                ).show()
+                updateButtons(spinner, numberPicker, toggleButtonGroup, buttonContainer)
 
-        var pisoSeleccionado = ""
+            }
 
-//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(
-//                parent: AdapterView<*>,
-//                view: View,
-//                position: Int,
-//                id: Long
-//            ) {
-//                updateTextView(spinner, numberPicker, toggleButtonGroup, textView)
-//                Toast.makeText(
-//                    requireContext(),
-//                    getString(R.string.selected_item) + " " + pisos[position],
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//                pisoSeleccionado = pisos[position]
-//            }
-//
-//            override fun onNothingSelected(parent: AdapterView<*>) {
-//                // Qué hacer cuando no se selecciona nada en el spinner
-//            }
-//        }
-
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                Log.d("HomeFragment", "onNothingSelected called")
+                // Manejar cuando no se selecciona nada
+            }
+        }
 
         binding.botonMapa.setOnClickListener {
-            var horarioSeleccionado = numberPicker.value
+            val horarioSeleccionado = numberPicker.value
             val pisoSeleccionado = spinner.selectedItem.toString()
             val selectedButtonId = toggleButtonGroup.checkedButtonId
             val diaSeleccionado = when (selectedButtonId) {
@@ -141,19 +132,82 @@ class HomeFragment : Fragment() {
         }
 
         numberPicker.setOnValueChangedListener { _, _, _ ->
-            updateTextView(spinner, numberPicker, toggleButtonGroup, textView)
+            updateButtons(spinner, numberPicker, toggleButtonGroup, buttonContainer)
         }
 
         toggleButtonGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
             if (isChecked) {
-                updateTextView(spinner, numberPicker, toggleButtonGroup, textView)
+                updateButtons(spinner, numberPicker, toggleButtonGroup, buttonContainer)
             }
         }
 
-       return root
-    }}
+        return root
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
+//    private fun updateTextView(spinner: Spinner, numberPicker: NumberPicker, toggleButtonGroup: MaterialButtonToggleGroup, textView: TextView) {
+//        val horarioSeleccionado = numberPicker.value
+//        val pisoSeleccionado = spinner.selectedItem.toString()
+//        val selectedButtonId = toggleButtonGroup.checkedButtonId
+//        val diaSeleccionado = when (selectedButtonId) {
+//            R.id.Lunes -> "Lunes"
+//            R.id.Martes -> "Martes"
+//            R.id.Miercoles -> "Miércoles"
+//            R.id.Jueves -> "Jueves"
+//            R.id.Viernes -> "Viernes"
+//            R.id.Sabado -> "Sábado"
+//            else -> "Ninguno"
+//        }
+//
+//        buscarAulas(pisoSeleccionado, horarioSeleccionado, diaSeleccionado,
+//            onSuccess = { result ->
+//                val aulasPorLinea = "Las aulas libres son:\n$result"
+//                textView.text = aulasPorLinea
+//            },
+//            onFailure = { error ->
+//                // Por si falla algo
+//                Log.e("Firebase", "Error al buscar aulas: $error")
+//            }
+//        )
+//    }
+    private fun updateButtons(spinner: Spinner, numberPicker: NumberPicker, toggleButtonGroup: MaterialButtonToggleGroup, buttonContainer: LinearLayout) {
+        val horarioSeleccionado = numberPicker.value
+        val pisoSeleccionado = spinner.selectedItem.toString()
+        val selectedButtonId = toggleButtonGroup.checkedButtonId
+        val diaSeleccionado = when (selectedButtonId) {
+            R.id.Lunes -> "Lunes"
+            R.id.Martes -> "Martes"
+            R.id.Miercoles -> "Miércoles"
+            R.id.Jueves -> "Jueves"
+            R.id.Viernes -> "Viernes"
+            R.id.Sabado -> "Sábado"
+            else -> "Ninguno"
+        }
+
+        buscarAulas(pisoSeleccionado, horarioSeleccionado, diaSeleccionado,
+            onSuccess = { result ->
+                buttonContainer.removeAllViews()
+                val aulas = result.split(", ")
+                for (aula in aulas) {
+                    val button = Button(requireContext()).apply {
+                        text = aula
+                        setOnClickListener {
+                            Toast.makeText(requireContext(), "Apretaste el aula: $aula", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    buttonContainer.addView(button)
+                }
+            },
+            onFailure = { error ->
+                // Por si falla algo
+                Log.e("Firebase", "Error al buscar aulas: $error")
+            }
+        )
+    }
     fun buscarAulas(
         pisoSeleccionado: String,
         horaSeleccionada: Int,
@@ -179,8 +233,6 @@ class HomeFragment : Fragment() {
                 }
 
                 val result = aulasEncontradas.joinToString(", ")
-
-
                 onSuccess(result)
             }
 
@@ -189,38 +241,4 @@ class HomeFragment : Fragment() {
             }
         })
     }
-
-
-    private fun updateTextView(spinner: Spinner, numberPicker: NumberPicker, toggleButtonGroup: MaterialButtonToggleGroup, textView: TextView) {
-
-        var horarioSeleccionado = numberPicker.value
-        val pisoSeleccionado = spinner.selectedItem.toString()
-        val selectedButtonId = toggleButtonGroup.checkedButtonId
-        val diaSeleccionado = when (selectedButtonId) {
-            R.id.Lunes -> "Lunes"
-            R.id.Martes -> "Martes"
-            R.id.Miercoles -> "Miércoles"
-            R.id.Jueves -> "Jueves"
-            R.id.Viernes -> "Viernes"
-            R.id.Sabado -> "Sábado"
-            else -> "Ninguno"
-        }
-
-        buscarAulas(pisoSeleccionado, horarioSeleccionado, diaSeleccionado,
-            onSuccess = { result ->
-
-                val aulasPorLinea = "Las aulas libres son:\n$result"
-                textView.text = aulasPorLinea
-
-            },
-            onFailure = { error ->
-                // Por si falla algo
-                Log.e("Firebase", "Error al buscar aulas: $error")
-            }
-        )
-    }
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        _binding = null
-//    }
-//}
+}

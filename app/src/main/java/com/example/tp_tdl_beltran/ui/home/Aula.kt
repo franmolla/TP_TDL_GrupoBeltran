@@ -36,6 +36,12 @@ data class Aula(
             10 -> this.`10`
             11 -> this.`11`
             12 -> this.`12`
+            13 -> this.`13`
+            14 -> this.`14`
+            15 -> this.`15`
+            16 -> this.`16`
+            17 -> this.`17`
+            18 -> this.`18`
             19 -> this.`19`
             20 -> this.`20`
             21 -> this.`21`
