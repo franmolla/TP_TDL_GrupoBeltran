@@ -69,9 +69,9 @@ class Piso2GalleryFragment : Fragment() {
         aula201.visibility = if (aulasDisponibles.contains("201")) View.VISIBLE else View.GONE
         aula202.visibility = if (aulasDisponibles.contains("202")) View.VISIBLE else View.GONE
         aula203.visibility = if (aulasDisponibles.contains("203")) View.VISIBLE else View.GONE
-        aula211a.visibility = if (aulasDisponibles.contains("211a")) View.VISIBLE else View.GONE
-        aula211b.visibility = if (aulasDisponibles.contains("211b")) View.VISIBLE else View.GONE
-        aula211c.visibility = if (aulasDisponibles.contains("211c")) View.VISIBLE else View.GONE
+        aula211a.visibility = if (aulasDisponibles.contains("211A")) View.VISIBLE else View.GONE
+        aula211b.visibility = if (aulasDisponibles.contains("211B")) View.VISIBLE else View.GONE
+        aula211c.visibility = if (aulasDisponibles.contains("211C")) View.VISIBLE else View.GONE
         aula221.visibility = if (aulasDisponibles.contains("221")) View.VISIBLE else View.GONE
         aula222.visibility = if (aulasDisponibles.contains("222")) View.VISIBLE else View.GONE
         aula237.visibility = if (aulasDisponibles.contains("237")) View.VISIBLE else View.GONE
