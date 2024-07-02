@@ -99,7 +99,7 @@ class HomeFragment : Fragment() {
                 else -> "Ninguno"
             }
 
-            buscarAulas(horarioSeleccionado, diaSeleccionado,
+            buscarAulas(pisoSeleccionado, horarioSeleccionado, diaSeleccionado,
                 onSuccess = { result ->
                     val aulasEncontradas = result.split(", ")
                     when (pisoSeleccionado) {
@@ -155,6 +155,7 @@ class HomeFragment : Fragment() {
 
 
     fun buscarAulas(
+        pisoSeleccionado: String,
         horaSeleccionada: Int,
         diaSeleccionado: String,
         onSuccess: (String) -> Unit,
@@ -171,7 +172,8 @@ class HomeFragment : Fragment() {
                     val aula = aulaSnapshot.getValue(Aula::class.java)
 
                     if (aula != null && aula.room.isNotEmpty() &&
-                        aula.getHoraField(horaSeleccionada) == "X") {
+                        aula.getHoraField(horaSeleccionada) == "X" &&
+                        aula.getPisoField(pisoSeleccionado) == "X") {
                         aulasEncontradas.add(aula.room)
                     }
                 }
@@ -204,7 +206,7 @@ class HomeFragment : Fragment() {
             else -> "Ninguno"
         }
 
-        buscarAulas(horarioSeleccionado, diaSeleccionado,
+        buscarAulas(pisoSeleccionado, horarioSeleccionado, diaSeleccionado,
             onSuccess = { result ->
 
                 val aulasPorLinea = "Las aulas libres son:\n$result"
